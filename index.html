@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Layout</title>
+    <link rel="icon" type="image/x-icon" href="assets/asa.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink: #1b1522;
+            --paper: #fbf8fc;
+            --muted: #6d6378;
+            --line: #e6dfee;
+            --accent: #c2185b;
+            --radius: 14px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+            color: var(--ink);
+            line-height: 1.6;
+            /* Gambar latar tetap, dengan lapisan gelap agar konten mudah dibaca */
+            background:
+                linear-gradient(rgba(20, 12, 28, 0.72), rgba(20, 12, 28, 0.72)),
+                url("assets/babymonster.jpg") center / cover fixed no-repeat;
+            background-color: var(--ink);
+        }
+
+        .page {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 48px 20px 64px;
+        }
+
+        header {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        header p {
+            margin: 0;
+            color: #d9cfe3;
+            font-size: 1rem;
+        }
+
+        .card {
+            background: var(--paper);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .card h2 {
+            margin: 0 0 4px;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .card .desc {
+            margin: 0 0 16px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Semua media mengikuti lebar kartu */
+        .card img,
+        .card video,
+        .card audio {
+            display: block;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card img {
+            height: auto;
+            max-height: 560px;
+            object-fit: cover;
+        }
+
+        .card video { background: #000; }
+
+        /* Bingkai 16:9 untuk video YouTube */
+        .embed {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        audio:focus-visible,
+        video:focus-visible,
+        iframe:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        footer {
+            text-align: center;
+            color: #bfb2cc;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .page { padding: 32px 14px 48px; }
+            .card { padding: 16px; }
+        }
+
+        /* ===== Efek kursor: naga pengikut ===== */
+        #dragon-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .dragon-on #dragon-canvas { opacity: 1; }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header>
+            <h1>Media & Layout</h1>
+            <p>Galeri gambar, audio, video, dan video YouTube.</p>
+        </header>
+
+        <!-- Tag image -->
+        <section class="card">
+            <h2>Gambar</h2>
+            <p class="desc">Foto utama.</p>
+            <img src="assets/Asa.jpg" alt="Foto Asa">
+        </section>
+
+        <!-- Tag audio -->
+        <section class="card">
+            <h2>Audio</h2>
+            <p class="desc">Lagu Jawa.</p>
+            <audio controls preload="none">
+                <source src="assets/lagu jawa.mp3" type="audio/mpeg">
+                Browser Anda tidak mendukung pemutar audio.
+            </audio>
+        </section>
+
+        <!-- Tag video -->
+        <section class="card">
+            <h2>Video</h2>
+            <p class="desc">Video Asa.</p>
+            <video controls preload="metadata">
+                <source src="assets/video asa.mp4" type="video/mp4">
+                Browser Anda tidak mendukung pemutar video.
+            </video>
+        </section>
+
+        <!-- Tag embed/iframe
+             1. Pilih 1 video YouTube
+             2. Klik Bagikan
+             3. Klik Sematkan
+             4. Salin kode
+        -->
+        <section class="card">
+            <h2>Video YouTube</h2>
+            <p class="desc">Video yang disematkan dari YouTube.</p>
+            <div class="embed">
+                <iframe
+                    src="https://www.youtube.com/embed/iWoodjQ7p8g?si=5S4pIz-8V7oFHMib"
+                    title="Pemutar video YouTube"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Media & Layout</p>
+        </footer>
+    </main>
+
+    <script>
+        (function () {
+            // Hanya aktif di perangkat dengan mouse, dan hormati pengaturan "kurangi gerakan"
+            var hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+            var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!hasMouse || reduceMotion) return;
+
+            var body = document.body;
+            var canvas = document.createElement("canvas");
+            canvas.id = "dragon-canvas";
+            body.appendChild(canvas);
+            var ctx = canvas.getContext("2d");
+
+            var W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+            function resize() {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = W * dpr;
+                canvas.height = H * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            resize();
+            window.addEventListener("resize", resize);
+
+            // ---- Pengaturan naga ----
+            var SEGMENTS = 72;          // panjang tubuh
+            var GAP = 11;               // jarak antar ruas
+            var MAX_TURN = 0.055;       // kelincahan berbelok (makin kecil, makin anggun)
+            var PATROL_SPEED = 3.2;     // kecepatan saat melingkari mutiara
+            var GOLD = "#4fc3f7";
+            var GOLD_DEEP = "#1e5fa8";
+            var OUTLINE = "#02050f";
+
+            // Gradien bergerak: rona bergelombang dari kepala ke ekor (cyan - biru - ungu)
+            function hueAt(k) { return 235 + 65 * Math.sin(t * 0.03 - k * 6); }
+            function accent(k, l, a) {
+                return "hsla(" + hueAt(k).toFixed(0) + ",100%," + (l == null ? 62 : l) + "%," + (a == null ? 1 : a) + ")";
+            }
+            function deep(k) { return "hsl(" + hueAt(k).toFixed(0) + ",70%,36%)"; }
+
+            var mouse = { x: W / 2, y: H / 2 };
+            var heading = 0;
+            var t = 0;
+            var seg = [];
+            for (var i = 0; i < SEGMENTS; i++) seg.push({ x: W / 2 - i * GAP, y: H / 2 });
+
+            document.addEventListener("pointermove", function (e) {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+                body.classList.add("dragon-on");
+            });
+            document.documentElement.addEventListener("pointerleave", function () {
+                body.classList.remove("dragon-on");
+            });
+
+            // Tebal di leher, runcing di ekor
+            function radius(i) {
+                var k = i / (SEGMENTS - 1);
+                return 2 + 13 * Math.pow(1 - k, 0.85);
+            }
+
+            // ---- Gerak: kepala berbelok perlahan menuju mutiara, lalu melingkarinya ----
+            function update() {
+                t++;
+                var head = seg[0];
+                var dx = mouse.x - head.x, dy = mouse.y - head.y;
+                var dist = Math.hypot(dx, dy);
+
+                var diff = Math.atan2(dy, dx) - heading;
+                while (diff > Math.PI) diff -= Math.PI * 2;
+                while (diff < -Math.PI) diff += Math.PI * 2;
+                heading += Math.max(-MAX_TURN, Math.min(MAX_TURN, diff));
+
+                var speed = dist > 90 ? Math.min(PATROL_SPEED + (dist - 90) * 0.045, 12) : PATROL_SPEED;
+                head.x += Math.cos(heading) * speed;
+                head.y += Math.sin(heading) * speed;
+
+                for (var i = 1; i < SEGMENTS; i++) {
+                    var prev = seg[i - 1], s = seg[i];
+                    var ax = s.x - prev.x, ay = s.y - prev.y;
+                    var d = Math.hypot(ax, ay) || 1;
+                    s.x = prev.x + ax / d * GAP;
+                    s.y = prev.y + ay / d * GAP;
+                }
+            }
+
+            function buildPoints() {
+                var pts = [];
+                for (var i = 0; i < SEGMENTS; i++) {
+                    var prev = seg[Math.max(i - 1, 0)];
+                    var next = seg[Math.min(i + 1, SEGMENTS - 1)];
+                    var a = Math.atan2(prev.y - next.y, prev.x - next.x);
+                    var off = Math.sin(t * 0.06 - i * 0.3) * 3.5 * Math.min(1, i / 8);
+                    pts.push({
+                        x: seg[i].x + Math.cos(a + Math.PI / 2) * off,
+                        y: seg[i].y + Math.sin(a + Math.PI / 2) * off,
+                        a: a,
+                        r: radius(i)
+                    });
+                }
+                return pts;
+            }
+
+            // ---- Mutiara naga di posisi kursor ----
+            function drawPearl() {
+                var pulse = 1 + Math.sin(t * 0.08) * 0.12;
+                var halo = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 34 * pulse);
+                halo.addColorStop(0, accent(0, 88, 0.85));
+                halo.addColorStop(0.35, accent(0, 60, 0.3));
+                halo.addColorStop(1, accent(0, 50, 0));
+                ctx.fillStyle = halo;
+                ctx.beginPath();
+                ctx.arc(mouse.x, mouse.y, 34 * pulse, 0, Math.PI * 2);
+                ctx.fill();
+
+                var core = ctx.createRadialGradient(mouse.x - 2, mouse.y - 2, 1, mouse.x, mouse.y, 8);
+                core.addColorStop(0, "#ffffff");
+                core.addColorStop(0.5, accent(0, 80, 1));
+                core.addColorStop(1, accent(0, 50, 1));
+                ctx.fillStyle = core;
+                ctx.beginPath();
+                ctx.arc(mouse.x, mouse.y, 7.5, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = accent(0, 88, 0.9);
+                for (var q = 0; q < 3; q++) {
+                    var ang = t * 0.04 + q * 2.094;
+                    ctx.beginPath();
+                    ctx.arc(mouse.x + Math.cos(ang) * 19, mouse.y + Math.sin(ang) * 19, 1.6, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // ---- Ekor berbentuk jumbai emas ----
+            function drawTailTuft(tp) {
+                ctx.fillStyle = accent(1);
+                ctx.strokeStyle = OUTLINE;
+                ctx.lineWidth = 1;
+                [-0.6, 0, 0.6].forEach(function (o, idx) {
+                    var ang = tp.a + Math.PI + o + Math.sin(t * 0.1 + idx) * 0.15;
+                    var len = o === 0 ? 28 : 19;
+                    var ex = tp.x + Math.cos(ang) * len, ey = tp.y + Math.sin(ang) * len;
+                    var px = -Math.sin(ang) * 5, py = Math.cos(ang) * 5;
+                    var mx = (tp.x + ex) / 2, my = (tp.y + ey) / 2;
+                    ctx.beginPath();
+                    ctx.moveTo(tp.x, tp.y);
+                    ctx.quadraticCurveTo(mx + px, my + py, ex, ey);
+                    ctx.quadraticCurveTo(mx - px, my - py, tp.x, tp.y);
+                    ctx.fill();
+                    ctx.stroke();
+                });
+            }
+
+            // ---- Kaki berkuku tiga ----
+            function drawLeg(p, side, phase, k) {
+                var swing = Math.sin(t * 0.07 + phase) * 0.25;
+                var a1 = p.a + side * (Math.PI / 2 + 0.7 + swing);
+                var hx = p.x + Math.cos(p.a + side * Math.PI / 2) * p.r * 0.6;
+                var hy = p.y + Math.sin(p.a + side * Math.PI / 2) * p.r * 0.6;
+                var kx = hx + Math.cos(a1) * 16, ky = hy + Math.sin(a1) * 16;
+                var a2 = a1 - side * 0.8;
+                var fx = kx + Math.cos(a2) * 13, fy = ky + Math.sin(a2) * 13;
+
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                [[6.5, OUTLINE], [4, deep(k)]].forEach(function (st) {
+                    ctx.lineWidth = st[0];
+                    ctx.strokeStyle = st[1];
+                    ctx.beginPath();
+                    ctx.moveTo(hx, hy);
+                    ctx.lineTo(kx, ky);
+                    ctx.lineTo(fx, fy);
+                    ctx.stroke();
+                });
+                ctx.strokeStyle = accent(k);
+                ctx.lineWidth = 2;
+                [-0.6, 0, 0.6].forEach(function (o) {
+                    ctx.beginPath();
+                    ctx.moveTo(fx, fy);
+                    ctx.lineTo(fx + Math.cos(a2 + o) * 8, fy + Math.sin(a2 + o) * 8);
+                    ctx.stroke();
+                });
+            }
+
+            // ---- Sirip emas yang menyapu ke belakang ----
+            function drawFin(p, side, i) {
+                var nx = Math.cos(p.a + side * Math.PI / 2), ny = Math.sin(p.a + side * Math.PI / 2);
+                var tx = Math.cos(p.a), ty = Math.sin(p.a);
+                var bx = p.x + nx * p.r * 0.75, by = p.y + ny * p.r * 0.75;
+                var len = p.r * 0.7 + 4 + Math.max(0, 12 - i) * 1.1;
+                var sway = Math.sin(t * 0.08 - i * 0.4) * 2;
+                ctx.beginPath();
+                ctx.moveTo(bx + tx * 4, by + ty * 4);
+                ctx.quadraticCurveTo(bx + nx * len * 0.8 + tx * 2, by + ny * len * 0.8 + ty * 2,
+                                     bx + nx * len - tx * (8 + sway), by + ny * len - ty * (8 + sway));
+                ctx.quadraticCurveTo(bx + nx * len * 0.3 - tx * 4, by + ny * len * 0.3 - ty * 4,
+                                     bx - tx * 4, by - ty * 4);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            // ---- Kepala: tanduk bercabang, kumis panjang, mata menyala ----
+            function drawHead(x, y, a) {
+                var w = Math.sin(t * 0.1);
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(a);
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+
+                // Kumis panjang yang berkibar
+                ctx.strokeStyle = accent(0, 62, 0.95);
+                ctx.lineWidth = 1.6;
+                [-1, 1].forEach(function (s) {
+                    ctx.beginPath();
+                    for (var u = 0; u <= 1.001; u += 0.0714) {
+                        var px = 32 - 90 * u;
+                        var py = s * (6 + 26 * Math.sin(Math.PI * u * 0.8)) + Math.sin(t * 0.1 - u * 5) * 8 * u;
+                        if (u === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                    }
+                    ctx.stroke();
+                });
+
+                // Tanduk bercabang
+                [-1, 1].forEach(function (s) {
+                    var sway = w * 3;
+                    [[6, OUTLINE], [3.6, accent(0)]].forEach(function (st) {
+                        ctx.lineWidth = st[0];
+                        ctx.strokeStyle = st[1];
+                        ctx.beginPath();
+                        ctx.moveTo(0, s * 9);
+                        ctx.quadraticCurveTo(-16, s * (13 + sway * 0.3), -34, s * (11 + sway));
+                        ctx.stroke();
+                    });
+                    [[4, OUTLINE], [2.2, accent(0)]].forEach(function (st) {
+                        ctx.lineWidth = st[0];
+                        ctx.strokeStyle = st[1];
+                        ctx.beginPath();
+                        ctx.moveTo(-13, s * 11.2);
+                        ctx.quadraticCurveTo(-17, s * 22, -9, s * 29);
+                        ctx.moveTo(-23, s * 11.7);
+                        ctx.quadraticCurveTo(-27, s * 21, -19, s * 26);
+                        ctx.stroke();
+                    });
+                });
+
+                // Tengkorak dan moncong
+                ctx.lineWidth = 1.6;
+                ctx.strokeStyle = OUTLINE;
+                ctx.fillStyle = "hsl(" + hueAt(0).toFixed(0) + ",70%,19%)";
+                ctx.beginPath();
+                ctx.ellipse(2, 0, 21, 14, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.fillStyle = "hsl(" + hueAt(0).toFixed(0) + ",65%,29%)";
+                ctx.beginPath();
+                ctx.ellipse(24, 0, 14, 9, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                // Alis dan tanda emas di dahi
+                ctx.strokeStyle = deep(0);
+                ctx.lineWidth = 2.4;
+                [-1, 1].forEach(function (s) {
+                    ctx.beginPath();
+                    ctx.moveTo(3, s * 11);
+                    ctx.lineTo(17, s * 7.5);
+                    ctx.stroke();
+                });
+                ctx.fillStyle = accent(0, 70);
+                ctx.beginPath();
+                ctx.moveTo(12, 0);
+                ctx.lineTo(7, 3.5);
+                ctx.lineTo(2, 0);
+                ctx.lineTo(7, -3.5);
+                ctx.closePath();
+                ctx.fill();
+
+                // Taring
+                ctx.fillStyle = "#eaf6ff";
+                ctx.strokeStyle = OUTLINE;
+                ctx.lineWidth = 0.8;
+                [-1, 1].forEach(function (s) {
+                    ctx.beginPath();
+                    ctx.moveTo(22, s * 8.5);
+                    ctx.lineTo(28, s * 8.5);
+                    ctx.lineTo(25, s * 13);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                });
+
+                // Lubang hidung
+                [-1, 1].forEach(function (s) {
+                    ctx.fillStyle = "hsl(" + hueAt(0).toFixed(0) + ",65%,29%)";
+                    ctx.lineWidth = 1.2;
+                    ctx.beginPath();
+                    ctx.arc(36, s * 4, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.fillStyle = OUTLINE;
+                    ctx.beginPath();
+                    ctx.arc(36.6, s * 4, 1, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Mata menyala
+                [-1, 1].forEach(function (s) {
+                    ctx.shadowColor = accent(0, 65, 0.95);
+                    ctx.shadowBlur = 10;
+                    ctx.fillStyle = accent(0, 88);
+                    ctx.beginPath();
+                    ctx.ellipse(9, s * 8, 4, 3.2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = "#02050f";
+                    ctx.beginPath();
+                    ctx.ellipse(9.8, s * 8, 1, 2.6, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                ctx.restore();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                var pts = buildPoints();
+                var j, k;
+
+                drawPearl();
+                drawTailTuft(pts[SEGMENTS - 1]);
+
+                // Kaki depan dan belakang
+                drawLeg(pts[13], 1, 0, 0.18);
+                drawLeg(pts[13], -1, Math.PI, 0.18);
+                drawLeg(pts[36], 1, Math.PI, 0.5);
+                drawLeg(pts[36], -1, 0, 0.5);
+
+                // Sirip di kedua sisi tubuh
+                ctx.fillStyle = GOLD;
+                ctx.strokeStyle = OUTLINE;
+                ctx.lineWidth = 0.8;
+                for (j = 2; j < SEGMENTS - 3; j += 2) {
+                    ctx.fillStyle = accent(j / (SEGMENTS - 1));
+                    drawFin(pts[j], 1, j);
+                    drawFin(pts[j], -1, j);
+                }
+
+                // Cahaya emas tipis di sekeliling tubuh
+                for (j = SEGMENTS - 1; j >= 0; j--) {
+                    ctx.fillStyle = accent(j / (SEGMENTS - 1), 60, 0.18);
+                    ctx.beginPath();
+                    ctx.arc(pts[j].x, pts[j].y, pts[j].r + 5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Tubuh bersisik: digambar dari ekor ke kepala
+                ctx.lineWidth = 1.5;
+                for (j = SEGMENTS - 1; j >= 0; j--) {
+                    var p = pts[j];
+                    k = j / (SEGMENTS - 1);
+                    ctx.fillStyle = "hsl(" + hueAt(k).toFixed(0) + ", 62%, " + (9 + (1 - k) * 17) + "%)";
+                    ctx.strokeStyle = OUTLINE;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    if (j % 2 === 0 && j > 1) {
+                        ctx.strokeStyle = accent(k, 62, 0.6);
+                        ctx.lineWidth = 1.2;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.r * 0.68, p.a + Math.PI - 0.95, p.a + Math.PI + 0.95);
+                        ctx.stroke();
+                        ctx.lineWidth = 1.5;
+                    }
+                }
+
+                // Garis punggung emas
+                ctx.lineWidth = 1.8;
+                for (j = 3; j < SEGMENTS - 3; j++) {
+                    ctx.strokeStyle = accent(j / (SEGMENTS - 1), 66, 0.7);
+                    ctx.beginPath();
+                    ctx.moveTo(pts[j - 1].x, pts[j - 1].y);
+                    ctx.lineTo(pts[j].x, pts[j].y);
+                    ctx.stroke();
+                }
+
+                drawHead(pts[0].x, pts[0].y, heading);
+            }
+
+            function loop() {
+                update();
+                draw();
+                requestAnimationFrame(loop);
+            }
+            requestAnimationFrame(loop);
+        })();
+    </script>
+</body>
+</html>
