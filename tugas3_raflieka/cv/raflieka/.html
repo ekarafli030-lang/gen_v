@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CV Rafli Eka</title>
+
+<!-- GAYA 1: EXTERNAL CSS (stylesheet dari luar, yaitu Google Fonts) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;800&display=swap">
+
+<!-- GAYA 2: INTERNAL CSS (blok style di dalam head) -->
+<style>
+:root{
+  --ink:#0d0b1a; --paper:#fff8e7; --violet:#6c3df0; --pink:#ff4fa3; --gold:#ffc83d; --cyan:#3de1ff;
+  --bg1:#120a2e; --bg2:#2a1060;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:dark;
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background:var(--bg1);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;overflow-x:hidden}
+
+/* ===== BACKGROUND BERGERAK ===== */
+#sky{position:fixed;inset:0;z-index:-1;overflow:hidden;
+  background:radial-gradient(ellipse at 70% 10%,#5b2bd6 0%,transparent 45%),linear-gradient(180deg,var(--bg2),var(--bg1) 70%)}
+.moon{position:absolute;top:6%;right:8%;width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fffbe0,#ffd86b 60%,#e0a52a);
+  box-shadow:0 0 60px 20px rgba(255,216,107,.45);animation:bob 6s ease-in-out infinite}
+.circle{position:absolute;left:50%;top:50%;width:min(130vw,900px);aspect-ratio:1;margin:calc(min(130vw,900px)/-2) 0 0 calc(min(130vw,900px)/-2);opacity:.28;animation:spin 60s linear infinite}
+.circle.r2{width:min(90vw,620px);margin:calc(min(90vw,620px)/-2) 0 0 calc(min(90vw,620px)/-2);animation-direction:reverse;animation-duration:40s;opacity:.35}
+.cloud{position:absolute;left:-40%;width:320px;height:70px;border-radius:50px;background:rgba(255,255,255,.07);filter:blur(10px);animation:drift linear infinite}
+.cloud:nth-of-type(3){top:22%;animation-duration:50s}
+.cloud:nth-of-type(4){top:55%;animation-duration:75s;animation-delay:-30s;height:90px}
+.cloud:nth-of-type(5){top:80%;animation-duration:60s;animation-delay:-10s}
+.dot{position:absolute;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 2px var(--gold);animation:rise linear infinite}
+.star{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:tw 2.5s ease-in-out infinite}
+.shoot{position:absolute;top:12%;left:-10%;width:140px;height:2px;background:linear-gradient(90deg,transparent,#fff);transform:rotate(25deg);animation:shoot 7s ease-in infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(14px)}}
+@keyframes drift{to{transform:translateX(220vw)}}
+@keyframes rise{from{transform:translateY(105vh);opacity:0}15%{opacity:1}to{transform:translateY(-10vh) translateX(40px);opacity:0}}
+@keyframes tw{50%{opacity:.15;transform:scale(1.8)}}
+@keyframes shoot{0%{transform:translate(0,0) rotate(25deg);opacity:0}5%{opacity:1}25%,100%{transform:translate(130vw,60vh) rotate(25deg);opacity:0}}
+
+/* ===== HALAMAN MANHWA ===== */
+.page{max-width:980px;margin:0 auto;padding:24px 16px 60px;display:grid;gap:22px;grid-template-columns:repeat(6,1fr)}
+.panel{position:relative;background:var(--paper);border:5px solid var(--ink);padding:20px;
+  box-shadow:8px 8px 0 var(--ink),8px 8px 0 3px var(--violet);transition:transform .25s}
+.panel::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.12;
+  background:radial-gradient(var(--ink) 1.2px,transparent 1.6px) 0 0/8px 8px}
+.panel:hover{transform:translate(-3px,-3px) rotate(-.4deg)}
+.panel > *{position:relative}
+.hero{grid-column:1/-1;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center;
+  background:linear-gradient(135deg,var(--paper) 55%,#ffe1f1);transform:skew(-1.2deg)}
+.hero:hover{transform:skew(-1.2deg) translate(-3px,-3px)}
+.speed{position:absolute!important;inset:0;opacity:.18;
+  background:repeating-conic-gradient(from 0deg at 25% 50%,var(--ink) 0 1.2deg,transparent 1.2deg 6deg)}
+.avatar{width:200px;height:240px;border:5px solid var(--ink);background:linear-gradient(160deg,var(--violet),var(--pink));
+  display:grid;place-items:center;font-size:90px;clip-path:polygon(0 0,100% 6%,94% 100%,6% 94%);animation:bob 4s ease-in-out infinite}
+h1{font-family:"Bangers",cursive;font-size:clamp(40px,8vw,76px);line-height:.95;margin:0;letter-spacing:2px;
+  color:var(--violet);-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--gold)}
+.rank{display:inline-block;margin:10px 0;background:var(--ink);color:var(--gold);padding:4px 12px;font-family:"Bangers";font-size:22px;letter-spacing:2px;transform:rotate(-2deg)}
+h2{font-family:"Bangers",cursive;font-size:32px;letter-spacing:2px;margin:0 0 10px;color:var(--ink);
+  background:var(--gold);display:inline-block;padding:0 12px;border:3px solid var(--ink);transform:rotate(-1.5deg)}
+.sfx{position:absolute!important;top:-18px;right:-8px;font-family:"Bangers";font-size:34px;color:var(--pink);
+  -webkit-text-stroke:2px var(--ink);text-shadow:3px 3px 0 var(--ink);transform:rotate(8deg);z-index:2;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:rotate(8deg) scale(1.15)}}
+.bubble{position:relative;background:#fff;border:4px solid var(--ink);border-radius:26px;padding:12px 16px;font-weight:700}
+.bubble::after{content:"";position:absolute;left:34px;bottom:-22px;border:10px solid transparent;border-top:18px solid var(--ink)}
+.s3{grid-column:span 3}.s2{grid-column:span 2}.s4{grid-column:span 4}.s6{grid-column:1/-1}
+.stat{margin:10px 0}
+.stat b{display:flex;justify-content:space-between;font-size:14px}
+.bar{height:16px;border:3px solid var(--ink);background:#fff;overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--violet),var(--pink));animation:grow 1.6s ease-out}
+@keyframes grow{from{width:0}}
+ul{margin:0;padding-left:20px}
+li{margin:4px 0}
+.chapter{border-left:6px solid var(--violet);padding-left:12px;margin:12px 0}
+.chapter small{font-family:"Bangers";letter-spacing:1px;color:var(--pink);font-size:18px}
+.badge{display:inline-block;margin:3px;padding:2px 10px;border:3px solid var(--ink);background:var(--cyan);font-weight:800;font-size:13px}
+.contact a{color:var(--ink);font-weight:800;text-decoration:none;border-bottom:3px solid var(--pink)}
+footer{grid-column:1/-1;text-align:center;color:#fff;font-family:"Bangers";letter-spacing:2px;font-size:22px;text-shadow:2px 2px 0 var(--violet)}
+@media(max-width:720px){
+  .hero{grid-template-columns:1fr;text-align:center;transform:none}.hero:hover{transform:none}
+  .avatar{margin:0 auto}.s3,.s2,.s4{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- Background bergerak -->
+<div id="sky" aria-hidden="true">
+  <div class="moon"></div>
+  <svg class="circle" viewBox="0 0 200 200" fill="none" stroke="#b69cff" stroke-width=".6">
+    <circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="88" stroke-dasharray="2 3"/>
+    <polygon points="100,8 180,146 20,146"/><polygon points="100,192 20,54 180,54"/>
+    <circle cx="100" cy="100" r="40"/><path d="M100 12v176M12 100h176"/>
+  </svg>
+  <svg class="circle r2" viewBox="0 0 200 200" fill="none" stroke="#ff9bd0" stroke-width=".7">
+    <circle cx="100" cy="100" r="95"/><circle cx="100" cy="100" r="80" stroke-dasharray="6 4"/>
+    <rect x="35" y="35" width="130" height="130"/><rect x="35" y="35" width="130" height="130" transform="rotate(45 100 100)"/>
+  </svg>
+  <div class="cloud"></div><div class="cloud"></div><div class="cloud"></div>
+  <div class="shoot"></div>
+</div>
+
+<main class="page">
+
+  <!-- GAYA 3: INLINE CSS (atribut style langsung pada elemen) -->
+  <section class="panel hero">
+    <div class="speed"></div>
+    <div class="avatar" role="img" aria-label="Avatar penyihir">🧙‍♂️</div>
+    <div>
+      <h1>MUHAMMAD RAFLI EKA PRASTYO</h1>
+      <div class="rank">⚔ RANK E · PENYIHIR PEMULA ⚔</div>
+      <div class="bubble" style="font-size:17px;max-width:520px">
+        "Petualanganku baru dimulai! Setiap bug adalah monster level awal, dan aku siap naik level setiap hari."
+      </div>
+    </div>
+  </section>
+
+  <section class="panel s4">
+    <span class="sfx">DOONG!</span>
+    <h2>📜 ORIGIN STORY</h2>
+    <p style="margin:6px 0 0;line-height:1.6">
+      Mahasiswa Teknik Informatika semester awal yang antusias di dunia web development.
+      Baru sekitar 3 bulan mengasah dasar-dasar <b style="color:#6c3df0">HTML</b>, <b style="color:#ff4fa3">CSS</b>, dan
+      <b style="color:#d98f00">JavaScript</b> lewat latihan dan proyek kecil, serta selalu haus mempelajari mantra baru.
+    </p>
+  </section>
+
+  <section class="panel s2 contact">
+    <h2>📮 GUILD</h2>
+    <p style="margin:6px 0;font-size:14px">
+      📧 <a href="mailto:ekarafli030@email.com">ekarafli030@email.com</a><br>
+      📱 +62 889-8305-4434<br>
+      📍 Jawa Timur, Indonesia<br>
+      🔗 <a href="#">github.com/Rafli Eka</a>
+    </p>
+  </section>
+
+  <section class="panel s3">
+    <h2>✨ STATUS SKILL</h2>
+    <div class="stat"><b><span>HTML &amp; CSS</span><span>Lv. 70</span></b><div class="bar"><i style="--w:70%"></i></div></div>
+    <div class="stat"><b><span>JavaScript</span><span>Lv. 40</span></b><div class="bar"><i style="--w:40%"></i></div></div>
+    <div class="stat"><b><span>UI / UX Sihir</span><span>Lv. 23</span></b><div class="bar"><i style="--w:23%"></i></div></div>
+    <div class="stat"><b><span>Database</span><span>Lv. 30</span></b><div class="bar"><i style="--w:30%"></i></div></div>
+    <p style="margin:12px 0 0"><span class="badge" style="background:#ffc83d">Sedang belajar</span><span class="badge">Git</span><span class="badge" style="background:#b69cff">Node.js</span></p>
+  </section>
+
+  <section class="panel s3">
+    <span class="sfx" style="color:#3de1ff">ZRAAK!</span>
+    <h2>⚔ PERJALANAN</h2>
+
+    <div class="chapter"><small>CHAPTER 1 · 2026 - sekarang</small>
+      <div><b>Junior Developer</b><br>Guild PeTIK II Jombang</div></div>
+   
+  </section>
+
+  <footer>~ TO BE CONTINUED... ~</footer>
+</main>
+
+<script>
+// Partikel sihir & bintang (dibuat dengan JS agar HTML tetap ringkas)
+(function(){
+  var sky=document.getElementById('sky'),i,e;
+  for(i=0;i<28;i++){e=document.createElement('div');e.className='dot';var s=3+Math.random()*5;
+    e.style.cssText='left:'+Math.random()*100+'%;width:'+s+'px;height:'+s+'px;animation-duration:'+(8+Math.random()*12)+'s;animation-delay:-'+Math.random()*15+'s';
+    sky.appendChild(e)}
+  for(i=0;i<45;i++){e=document.createElement('div');e.className='star';
+    e.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;animation-delay:-'+Math.random()*3+'s';
+    sky.appendChild(e)}
+})();
+</script>
+</body>
+</html>
