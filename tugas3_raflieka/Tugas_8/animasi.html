@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Marquee & Ball on Box</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #070913;
+            --card-bg: rgba(14, 18, 36, 0.75);
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff0055;
+            --neon-yellow: #ffe600;
+            --neon-purple: #9d00ff;
+            --neon-green: #05ffa1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(ellipse at 20% 20%, rgba(255, 0, 85, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 243, 255, 0.15) 0%, transparent 40%),
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: #e0e6ed;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            position: relative; /* Menjadi acuan posisi absolut bola */
+        }
+
+        /* Bola Biliar (Bola 8) Menempel Pas di Atas Kotak */
+        .billiard-ball {
+            position: absolute;
+            left: 0;
+            top: -60px; /* Nilai sama dengan tinggi bola agar duduk pas di atas border card */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #434343, #111111 70%, #000000 100%);
+            box-shadow: 
+                0 0 15px rgba(0, 243, 255, 0.4),
+                inset -3px -3px 8px rgba(0, 0, 0, 0.8),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            animation: rollOnTop 4s ease-in-out infinite alternate;
+        }
+
+        /* Lingkaran Putih Angka 8 */
+        .ball-badge {
+            width: 26px;
+            height: 26px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Angka 8 */
+        .ball-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 900;
+            color: #070913;
+            line-height: 1;
+        }
+
+        /* Header Card (Kotak Teks) */
+        .header-card {
+            padding: 40px 0;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.15), inset 0 0 15px rgba(0, 243, 255, 0.05);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .zoom {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            display: inline-block;
+            animation: moveLeftContinuous 10s linear infinite;
+        }
+
+        /* Animasi Bola Menggelinding Pas di Atas Kotak */
+        @keyframes rollOnTop {
+            0% {
+                transform: translateX(0) rotate(0deg);
+            }
+            100% {
+                /* Menggelinding hingga ujung kanan kotak */
+                transform: translateX(calc(1100px - 60px)) rotate(720deg);
+            }
+        }
+
+        /* Penyesuaian Responsif Layar Kecil */
+        @media (max-width: 1100px) {
+            @keyframes rollOnTop {
+                0% {
+                    transform: translateX(0) rotate(0deg);
+                }
+                100% {
+                    transform: translateX(calc(100vw - 100px)) rotate(720deg);
+                }
+            }
+        }
+
+        /* Animasi Teks Meluncur ke Kiri Terus */
+        @keyframes moveLeftContinuous {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Bola biliar langsung menempel di atas sisi kartu -->
+        <div class="billiard-ball">
+            <div class="ball-badge">
+                <span class="ball-number">8</span>
+            </div>
+        </div>
+
+        <!-- Kotak Teks -->
+        <header class="header-card">
+            <h1 class="zoom">Selamat Belajar Transition & Animation</h1>
+        </header>
+    </div>
+</body>
+</html>
